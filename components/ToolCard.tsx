@@ -49,12 +49,17 @@ const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, rank }) => {
   return (
-    <a 
-      href={tool.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <article
       className="group flex flex-col overflow-hidden bg-white dark:bg-neutral-900 transition-all duration-300 ease-in-out hover:shadow-lg hover:dark:shadow-neutral-800/50 hover:-translate-y-1 border border-neutral-200 dark:border-neutral-800 rounded-lg"
     >
+      <a
+        href={tool.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="touch-target flex flex-col h-full"
+        aria-label={`Visit ${tool.name} website - ${tool.description}`}
+        role="link"
+      >
       <div className="relative aspect-video bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center overflow-hidden rounded-t-lg">
         <img
           src={tool.imageUrl}
@@ -63,30 +68,45 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, ran
           loading="lazy"
         />
         {/* Rank badge */}
-        <div className="absolute top-2 left-2 bg-black/70 dark:bg-black/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <div
+          className="absolute top-2 left-2 bg-black/70 dark:bg-black/80 text-white text-xs font-bold px-2 py-1 rounded-full"
+          aria-label={`Rank ${rank}`}
+          role="status"
+        >
           #{rank}
         </div>
         {/* Overlay with description, appears on hover only in grid-hover mode */}
         {viewMode === 'grid-hover' && (
-             <div className="absolute inset-0 p-4 bg-black/80 dark:bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+             <div
+               className="absolute inset-0 p-touch-md bg-black/80 dark:bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+               aria-hidden="true"
+             >
               <p className="text-center text-sm text-neutral-100">
                 {tool.description}
               </p>
             </div>
         )}
       </div>
-      <div className="p-4 border-t border-neutral-100 dark:border-neutral-800/50 flex-grow flex flex-col">
-        <h3 className="font-semibold text-base truncate text-black dark:text-white">{tool.name}</h3>
+      <div className="p-touch-md border-t border-neutral-100 dark:border-neutral-800/50 flex-grow flex flex-col">
+        <h3 className="font-semibold text-base truncate text-black dark:text-white" role="heading" aria-level="3">{tool.name}</h3>
         
         {viewMode === 'grid-visible' && (
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 flex-grow">
+            <p
+              className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 flex-grow"
+              aria-label="Tool description"
+            >
                 {tool.description}
             </p>
         )}
 
-        <div className="mt-2 flex flex-wrap gap-1.5">
+        <div className="mt-2 flex flex-wrap gap-1.5" role="list" aria-label="Tool keywords">
           {tool.keywords.slice(0, 2).map(keyword => (
-            <span key={keyword} className="px-2 py-0.5 text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">
+            <span
+              key={keyword}
+              className="px-2 py-0.5 text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full"
+              role="listitem"
+              aria-label={`Keyword: ${keyword}`}
+            >
               {keyword}
             </span>
           ))}
@@ -95,12 +115,16 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, ran
         {viewMode === 'grid-hover' && !isAdvancedMode && <div className="flex-grow"></div> /* Spacer */}
 
         {isAdvancedMode ? <AdvancedInfo tool={tool} /> : (
-            <div className="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-end text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
-                <div className="flex items-center space-x-1" title="Daily Visits">
+            <div
+              className="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-end text-xs text-neutral-500 dark:text-neutral-400 space-x-4"
+              role="region"
+              aria-label="Popularity metrics"
+            >
+                <div className="flex items-center space-x-1 touch-target" title="Daily Visits" aria-label={`${formatCount(tool.popularity.daily)} daily visits`}>
                     <UserIcon />
                     <span>{formatCount(tool.popularity.daily)}/d</span>
                 </div>
-                <div className="flex items-center space-x-1" title="Weekly Visits">
+                <div className="flex items-center space-x-1 touch-target" title="Weekly Visits" aria-label={`${formatCount(tool.popularity.weekly)} weekly visits`}>
                     <UserIcon />
                     <span>{formatCount(tool.popularity.weekly)}/w</span>
                 </div>
@@ -108,6 +132,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, ran
         )}
       </div>
     </a>
+    </article>
   );
 };
 

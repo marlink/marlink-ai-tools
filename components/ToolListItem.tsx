@@ -47,27 +47,65 @@ const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
 
 const ToolListItem: React.FC<ToolListItemProps> = ({ tool, rank, isAdvancedMode }) => {
   return (
-    <a
-      href={tool.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex flex-col p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors duration-200 group rounded-lg"
+    <article
+      className="flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors duration-200 group rounded-lg"
     >
-        <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0 text-lg font-bold text-neutral-400 dark:text-neutral-500 w-8 text-center">{rank}.</div>
-            <div className="flex-shrink-0 h-12 w-12 bg-neutral-100 dark:bg-neutral-800 overflow-hidden rounded-md">
+      <a
+        href={tool.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="touch-target flex flex-col p-touch-md"
+        aria-label={`Visit ${tool.name} website - ${tool.description}`}
+        role="link"
+      >
+        <div className="flex items-center space-x-touch-md">
+            <div
+              className="flex-shrink-0 text-lg font-bold text-neutral-400 dark:text-neutral-500 w-8 text-center touch-target"
+              aria-label={`Rank ${rank}`}
+              role="status"
+            >
+              {rank}.
+            </div>
+            <div
+              className="flex-shrink-0 h-12 w-12 bg-neutral-100 dark:bg-neutral-800 overflow-hidden rounded-md"
+              role="img"
+              aria-label={`${tool.name} logo`}
+            >
                 <img src={tool.imageUrl} alt={`${tool.name} thumbnail`} className="h-full w-full object-cover" loading="lazy" />
             </div>
             <div className="flex-grow min-w-0">
-                <h3 className="font-semibold text-base truncate text-black dark:text-white group-hover:underline">{tool.name}</h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 truncate">{tool.description}</p>
+                <h3
+                  className="font-semibold text-base truncate text-black dark:text-white group-hover:underline"
+                  role="heading"
+                  aria-level="3"
+                >
+                  {tool.name}
+                </h3>
+                <p
+                  className="text-sm text-neutral-600 dark:text-neutral-400 truncate"
+                  aria-label="Tool description"
+                >
+                  {tool.description}
+                </p>
             </div>
-            <div className="hidden sm:flex items-center flex-shrink-0 text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
-                    <div className="flex items-center space-x-1" title="Daily Visits">
+            <div
+              className="hidden sm:flex items-center flex-shrink-0 text-xs text-neutral-500 dark:text-neutral-400 space-x-4"
+              role="region"
+              aria-label="Popularity metrics"
+            >
+                    <div
+                      className="flex items-center space-x-1 touch-target"
+                      title="Daily Visits"
+                      aria-label={`${formatCount(tool.popularity.daily)} daily visits`}
+                    >
                         <UserIcon />
                         <span>{formatCount(tool.popularity.daily)}/d</span>
                     </div>
-                    <div className="flex items-center space-x-1" title="Weekly Visits">
+                    <div
+                      className="flex items-center space-x-1 touch-target"
+                      title="Weekly Visits"
+                      aria-label={`${formatCount(tool.popularity.weekly)} weekly visits`}
+                    >
                         <UserIcon />
                         <span>{formatCount(tool.popularity.weekly)}/w</span>
                     </div>
@@ -75,6 +113,7 @@ const ToolListItem: React.FC<ToolListItemProps> = ({ tool, rank, isAdvancedMode 
         </div>
         {isAdvancedMode && <AdvancedInfo tool={tool} />}
     </a>
+    </article>
   );
 };
 

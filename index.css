@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom touch-friendly utilities */
+@layer utilities {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .touch-spacing {
+    padding: 12px 16px;
+  }
+
+  .touch-margin {
+    margin: 8px;
+  }
+}
+
+/* Custom spacing tokens for mobile */
+@layer tokens {
+  :root {
+    --touch-spacing-xs: 8px;
+    --touch-spacing-sm: 12px;
+    --touch-spacing-md: 16px;
+    --touch-spacing-lg: 20px;
+    --touch-spacing-xl: 24px;
+  }
+}
