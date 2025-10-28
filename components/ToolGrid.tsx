@@ -44,8 +44,8 @@ const ToolGrid: React.FC<ToolGridProps> = ({ tools, viewMode, isAdvancedMode, lo
     return (
         <main className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-                {tools.map(tool => (
-                    <ToolCard key={tool.id} tool={tool} viewMode={viewMode} isAdvancedMode={isAdvancedMode} />
+                {tools.map((tool, index) => (
+                    <ToolCard key={tool.id} tool={tool} viewMode={viewMode} isAdvancedMode={isAdvancedMode} rank={index + 1} />
                 ))}
             </div>
         </main>

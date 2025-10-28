@@ -5,6 +5,7 @@ interface ToolCardProps {
   tool: Tool;
   viewMode: 'grid-hover' | 'grid-visible';
   isAdvancedMode: boolean;
+  rank: number;
 }
 
 const UserIcon = () => (
@@ -46,7 +47,7 @@ const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
     </div>
 );
 
-const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode }) => {
+const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, rank }) => {
   return (
     <a 
       href={tool.url}
@@ -61,6 +62,10 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode }) =
           className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
           loading="lazy"
         />
+        {/* Rank badge */}
+        <div className="absolute top-2 left-2 bg-black/70 dark:bg-black/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+          #{rank}
+        </div>
         {/* Overlay with description, appears on hover only in grid-hover mode */}
         {viewMode === 'grid-hover' && (
              <div className="absolute inset-0 p-4 bg-black/80 dark:bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
