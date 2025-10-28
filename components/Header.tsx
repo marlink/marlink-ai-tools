@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenAdmin, onOpenSubmitForm, theme, o
     };
 
     return (
-        <header className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-neutral-200/80 dark:lg:border-neutral-800/80 bg-white/80 dark:bg-black/80">
+        <header className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-neutral-200/80 dark:lg:border-neutral-800/80 bg-black">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center space-x-3">

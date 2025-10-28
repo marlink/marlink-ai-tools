@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import FilterBar from './components/FilterBar';
 import ToolGrid from './components/ToolGrid';
 import FeaturedTools from './components/FeaturedTools';
+import Footer from './components/Footer';
 import { Tool, Theme, SortOption, ViewMode } from './types';
 
 const AdminPanel = lazy(() => import('./components/AdminPanel'));
@@ -241,6 +242,8 @@ function App() {
       />
 
       <ToolGrid tools={filteredAndSortedTools} viewMode={viewMode} isAdvancedMode={isAdvancedMode} loading={loading} />
+
+      <Footer />
 
       {isAdminOpen && (
         <Suspense fallback={<div className="fixed inset-0 bg-black/50 z-50" />}>
