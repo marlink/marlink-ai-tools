@@ -24,11 +24,15 @@ const MoonIcon = () => (
 
 const Header: React.FC<HeaderProps> = ({ onOpenAdmin, onOpenSubmitForm, theme, onThemeChange, isAdvancedMode, onAdvancedModeChange }) => {
     const toggleTheme = () => {
-        onThemeChange(theme === Theme.Light ? Theme.Dark : Theme.Light);
+        console.log('Header: toggleTheme called, current theme:', theme);
+        const newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
+        console.log('Header: switching to theme:', newTheme);
+        onThemeChange(newTheme);
     };
 
+    console.log('Header: rendering with theme:', theme, 'and classes:', 'sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-neutral-200/80 dark:lg:border-neutral-800/80 bg-white dark:bg-black');
     return (
-        <header className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-neutral-200/80 dark:lg:border-neutral-800/80 bg-black">
+        <header className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-neutral-200/80 dark:lg:border-neutral-800/80 bg-white dark:bg-black">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center space-x-3">
@@ -41,14 +45,14 @@ const Header: React.FC<HeaderProps> = ({ onOpenAdmin, onOpenSubmitForm, theme, o
                              <h1 className="text-xl font-bold tracking-tighter text-black dark:text-white">
                                 Most visited AI tools
                             </h1>
-                            <a href="https://marceli.info" target="_blank" rel="noopener noreferrer" className="text-xs text-neutral-500 dark:text-neutral-400 hover:underline">
+                            <a href="https://marceli.info" target="_blank" rel="noopener noreferrer" className="text-xs text-black dark:text-white hover:underline">
                                 by marceli.info
                             </a>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
                          <div className="flex items-center space-x-2">
-                            <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400">Advanced Mode</span>
+                            <span className="text-xs font-medium text-black dark:text-white">Advanced Mode</span>
                             <button
                                 onClick={() => onAdvancedModeChange(!isAdvancedMode)}
                                 className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${isAdvancedMode ? 'bg-black dark:bg-white' : 'bg-neutral-300 dark:bg-neutral-700'}`}
@@ -65,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenAdmin, onOpenSubmitForm, theme, o
                         </button>
                         <button 
                             onClick={onOpenAdmin}
-                            className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+                            className="text-sm text-black dark:text-white hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors"
                         >
                            Admin
                         </button>

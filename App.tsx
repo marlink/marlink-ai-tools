@@ -143,11 +143,15 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('App: theme changed to:', theme);
     if (theme === Theme.Dark) {
+      console.log('App: adding dark class to documentElement');
       document.documentElement.classList.add('dark');
     } else {
+      console.log('App: removing dark class from documentElement');
       document.documentElement.classList.remove('dark');
     }
+    console.log('App: setting color-scheme to:', theme);
     document.documentElement.style.setProperty('color-scheme', theme);
   }, [theme]);
 
