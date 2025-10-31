@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import type { Tool } from '../types';
 
 interface ToolListItemProps {
@@ -24,7 +24,7 @@ const UserIcon = () => (
 const CheckIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>);
 const XIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>);
 
-const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
+const AdvancedInfo: React.FC<{ tool: Tool }> = memo(({ tool }) => (
     <div className="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-800 text-xs space-y-1 text-neutral-600 dark:text-neutral-400">
         <div className="flex justify-between items-center">
             <span className="font-medium">Free Tier/Trial:</span>
@@ -43,7 +43,7 @@ const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
             <p><span className="font-medium">Notes:</span> {tool.notes}</p>
         </div>
     </div>
-);
+));
 
 const ToolListItem: React.FC<ToolListItemProps> = ({ tool, rank, isAdvancedMode }) => {
   return (
@@ -117,4 +117,4 @@ const ToolListItem: React.FC<ToolListItemProps> = ({ tool, rank, isAdvancedMode 
   );
 };
 
-export default ToolListItem;
+export default memo(ToolListItem);

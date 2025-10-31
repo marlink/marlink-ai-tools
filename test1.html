@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Emergent Silver Typography Shadow Showcase</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #000e1b; /* As specified: black is never full black #000E1B */
+                min-height: 100vh;
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    sans-serif;
+                overflow-x: hidden;
+                position: relative;
+                display: flex; /* To center content */
+                flex-direction: column;
+                justify-content: center; /* Vertically center */
+                align-items: center; /* Horizontally center */
+            }
+
+            /* Animated ambient background gradient (center out from canvas) */
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background:
+                    radial-gradient(
+                        circle at 20% 50%,
+                        rgba(0, 14, 27, 0.5) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 80% 80%,
+                        rgba(244, 244, 244, 0.03) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 40% 20%,
+                        rgba(244, 244, 244, 0.02) 0%,
+                        transparent 50%
+                    );
+                z-index: 0;
+                animation: ambientLightShift 15s ease-in-out infinite alternate;
+            }
+
+            @keyframes ambientLightShift {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.05);
+                    opacity: 0.95;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            .container {
+                position: relative;
+                z-index: 1;
+                padding: 60px 20px;
+                max-width: 1400px;
+                width: 100%;
+                margin: auto; /* Centering the container */
+            }
+
+            .heading-wrapper {
+                margin: 80px 0;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 300px;
+            }
+
+            /* BASE HEADING STYLE: The "Emergent Silver" look */
+            .heading {
+                font-size: 180px;
+                font-weight: 900;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                text-align: center;
+
+                /* Silver Gradient: predominantly light white, fading gently dark on the left */
+                background: linear-gradient(
+                    90deg,
+                    #1a2a3a 0%,
+                    /* Darker tone on the far left (closer to #000E1B) */
+                        #f4f4f4 20%,
+                    /* Quickly transitions to the specified light white */
+                        #f4f4f4 100%
+                ); /* Stays light white for the rest of the text */
+
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+
+                position: relative;
+                transition: all 0.3s ease; /* For interactive effects */
+
+                /* Default subtle shadow to give a base "coming out of shadow" feel */
+                filter: drop-shadow(0 0 5px rgba(244, 244, 244, 0.1))
+                    /* Inner light catch */
+                    drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5)); /* Subtle dark lift */
+            }
+
+            /* Style 1: Enhanced Soft Glow */
+            .style-1 .heading {
+                filter: drop-shadow(0 0 10px rgba(244, 244, 244, 0.3))
+                    /* Brighter, tighter glow */
+                    drop-shadow(0 0 40px rgba(244, 244, 244, 0.2))
+                    /* Wider, softer glow */
+                    drop-shadow(0 0 80px rgba(244, 244, 244, 0.1)); /* Very broad, atmospheric glow */
+                /* Text-shadow for definition combined with the filter for glow */
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Style 2: Subdued Depth */
+            .style-2 .heading {
+                /* Multiple text-shadows for a layered 3D effect, projecting slightly */
+                text-shadow:
+                    2px 2px 0 #1a2a3a,
+                    /* Darker layer 1 */ 4px 4px 0 #162030,
+                    /* Darker layer 2 */ 6px 6px 0 #121828,
+                    /* Darker layer 3 */ 8px 8px 10px rgba(0, 0, 0, 0.7); /* Deep, diffused shadow below */
+                filter: none; /* Remove default filter for this specific depth effect */
+            }
+
+            /* Style 3: Refined Neon Glow */
+            .style-3 .heading {
+                filter: drop-shadow(0 0 15px rgba(244, 244, 244, 0.6))
+                    /* Intense inner glow */
+                    drop-shadow(0 0 30px rgba(244, 244, 244, 0.4))
+                    drop-shadow(0 0 60px rgba(244, 244, 244, 0.2))
+                    drop-shadow(0 0 100px rgba(244, 244, 244, 0.1));
+                /* Subtle animation to enhance glow */
+                animation: neonFlicker 2.5s ease-in-out infinite alternate;
+            }
+
+            @keyframes neonFlicker {
+                0%,
+                100% {
+                    filter: drop-shadow(0 0 15px rgba(244, 244, 244, 0.6))
+                        drop-shadow(0 0 30px rgba(244, 244, 244, 0.4));
+                }
+                50% {
+                    filter: drop-shadow(0 0 20px rgba(244, 244, 244, 0.7))
+                        drop-shadow(0 0 40px rgba(244, 244, 244, 0.5));
+                }
+            }
+
+            /* Style 4: Glass Morphism Encapsulation */
+            .style-4 {
+                /* Glass morphism container properties */
+                backdrop-filter: blur(15px) saturate(180%);
+                background: rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                ); /* Slightly more opaque background */
+                border-radius: 25px;
+                padding: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.4),
+                    /* Deeper external shadow */ inset 0 1px 0
+                        rgba(255, 255, 255, 0.1); /* Subtle internal highlight */
+            }
+
+            .style-4 .heading {
+                /* Shadow tailored for text inside a glass element */
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6))
+                    /* Clear shadow within the glass */
+                    drop-shadow(0 0 20px rgba(244, 244, 244, 0.1)); /* Subtle light from text */
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* For better definition */
+            }
+
+            /* Style 5: Deep Atmospheric Glow */
+            .style-5 .heading {
+                filter: drop-shadow(0 0 10px rgba(244, 244, 244, 0.2))
+                    drop-shadow(0 0 20px rgba(244, 244, 244, 0.15))
+                    drop-shadow(0 0 30px rgba(244, 244, 244, 0.1))
+                    drop-shadow(0 0 40px rgba(244, 244, 244, 0.05));
+                /* Darker, larger text-shadows for a heavy, deep presence */
+                text-shadow:
+                    0 5px 10px rgba(0, 0, 0, 0.8),
+                    0 10px 20px rgba(0, 0, 0, 0.6),
+                    0 15px 30px rgba(0, 0, 0, 0.4);
+            }
+
+            /* Style 6: Shimmering Glint */
+            .style-6 .heading {
+                position: relative;
+                /* Add a subtle animation that gives a shimmering glint effect */
+                animation: glintEffect 4s ease-in-out infinite;
+                filter: drop-shadow(0 0 10px rgba(244, 244, 244, 0.2))
+                    drop-shadow(0 0 20px rgba(244, 244, 244, 0.1));
+            }
+
+            @keyframes glintEffect {
+                0%,
+                100% {
+                    background-position: 0% 50%;
+                    filter: drop-shadow(0 0 10px rgba(244, 244, 244, 0.2))
+                        drop-shadow(0 0 20px rgba(244, 244, 244, 0.1));
+                }
+                50% {
+                    background-position: 100% 50%;
+                    filter: drop-shadow(0 0 15px rgba(244, 244, 244, 0.3))
+                        drop-shadow(0 0 25px rgba(244, 244, 244, 0.15));
+                }
+            }
+            /* Override base gradient with an animated one for glint */
+            .style-6 .heading {
+                background: linear-gradient(
+                    90deg,
+                    #1a2a3a 0%,
+                    #f4f4f4 20%,
+                    #f4f4f4 40%,
+                    rgba(244, 244, 244, 0.8) 50%,
+                    /* Highlight for glint */ #f4f4f4 60%,
+                    #f4f4f4 80%,
+                    #1a2a3a 100%
+                );
+                background-size: 300% 100%; /* Make gradient wider for movement */
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            /* Style Labels */
+            .style-label {
+                position: absolute;
+                top: -40px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                padding: 8px 20px;
+                border-radius: 20px;
+                color: #f4f4f4;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                white-space: nowrap; /* Prevent label from wrapping */
+            }
+
+            /* Interactive hover effects */
+            .heading:hover {
+                transform: scale(1.02);
+                filter: brightness(1.1) saturate(1.1);
+                transition:
+                    transform 0.3s ease,
+                    filter 0.3s ease;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 1024px) {
+                .heading {
+                    font-size: 120px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .heading {
+                    font-size: 80px;
+                }
+                .heading-wrapper {
+                    margin: 60px 0;
+                    min-height: 200px;
+                }
+                .style-label {
+                    font-size: 10px;
+                    padding: 6px 15px;
+                }
+                .style-4 {
+                    padding: 30px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .heading {
+                    font-size: 50px;
+                }
+                .heading-wrapper {
+                    margin: 40px 0;
+                    min-height: 150px;
+                }
+                .style-label {
+                    font-size: 8px;
+                    padding: 4px 10px;
+                    top: -30px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- BASE STYLE: Emergent Silver (default for all headings) -->
+            <div class="heading-wrapper">
+                <span class="style-label">Emergent Silver Base</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 1: Enhanced Soft Glow -->
+            <div class="heading-wrapper style-1">
+                <span class="style-label">Enhanced Soft Glow</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 2: Subdued Depth -->
+            <div class="heading-wrapper style-2">
+                <span class="style-label">Subdued Depth</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 3: Refined Neon Glow -->
+            <div class="heading-wrapper style-3">
+                <span class="style-label">Refined Neon Glow</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 4: Glass Morphism Encapsulation -->
+            <div class="heading-wrapper style-4">
+                <span class="style-label">Glass Morphism Encapsulation</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 5: Deep Atmospheric Glow -->
+            <div class="heading-wrapper style-5">
+                <span class="style-label">Deep Atmospheric Glow</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+
+            <!-- Style 6: Shimmering Glint -->
+            <div class="heading-wrapper style-6">
+                <span class="style-label">Shimmering Glint</span>
+                <h1 class="heading">Lorem ipsum</h1>
+            </div>
+        </div>
+
+        <script>
+            // Interactive mouse parallax effect (subtle movement for depth)
+            document.addEventListener("mousemove", (e) => {
+                const headings = document.querySelectorAll(".heading");
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                headings.forEach((heading, index) => {
+                    // Adjust intensity based on heading's position or style if needed
+                    const baseIntensity = 8; // Max pixels for movement
+                    const xOffset = (x - 0.5) * baseIntensity;
+                    const yOffset = (y - 0.5) * baseIntensity;
+
+                    heading.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(1.0)`; // Keep scale at 1 to allow hover scale
+                });
+            });
+
+            // Reset transform on mouse leave or when mouse is still
+            let mouseLeaveTimeout;
+            document.addEventListener("mousemove", () => {
+                clearTimeout(mouseLeaveTimeout);
+                mouseLeaveTimeout = setTimeout(() => {
+                    const headings = document.querySelectorAll(".heading");
+                    headings.forEach((heading) => {
+                        heading.style.transform = "translate(0, 0) scale(1)";
+                    });
+                }, 100); // Reset after 100ms of no mouse movement
+            });
+
+            document.addEventListener("mouseleave", () => {
+                clearTimeout(mouseLeaveTimeout);
+                const headings = document.querySelectorAll(".heading");
+                headings.forEach((heading) => {
+                    heading.style.transform = "translate(0, 0) scale(1)";
+                });
+            });
+        </script>
+    </body>
+</html>

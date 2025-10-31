@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import type { Tool, ViewMode } from '../types';
 
 interface ToolCardProps {
@@ -26,7 +26,7 @@ const formatCount = (num: number): string => {
     return num.toString();
 };
 
-const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
+const AdvancedInfo: React.FC<{ tool: Tool }> = memo(({ tool }) => (
     <div className="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-800 text-xs space-y-2 text-neutral-600 dark:text-neutral-400">
         <div className="flex justify-between items-center">
             <span className="font-medium">Free Tier/Trial:</span>
@@ -45,12 +45,12 @@ const AdvancedInfo: React.FC<{ tool: Tool }> = ({ tool }) => (
             <p><span className="font-medium">Notes:</span> {tool.notes}</p>
         </div>
     </div>
-);
+));
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, rank }) => {
   return (
     <article
-      className="group flex flex-col overflow-hidden bg-white dark:bg-neutral-900 transition-all duration-300 ease-in-out hover:shadow-lg hover:dark:shadow-neutral-800/50 hover:-translate-y-1 border border-neutral-200 dark:border-neutral-800 rounded-lg"
+      className="group flex flex-col overflow-hidden bg-white dark:bg-neutral-900 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-neutral-200/50 dark:hover:shadow-neutral-800/50 hover:-translate-y-2 hover:scale-[1.02] border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 rounded-lg"
     >
       <a
         href={tool.url}
@@ -78,32 +78,32 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, ran
         {/* Overlay with description, appears on hover only in grid-hover mode */}
         {viewMode === 'grid-hover' && (
              <div
-               className="absolute inset-0 p-touch-md bg-black/80 dark:bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+               className="absolute inset-0 p-3 sm:p-4 bg-black/80 dark:bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
                aria-hidden="true"
              >
-              <p className="text-center text-sm text-neutral-100">
+              <p className="text-center text-xs sm:text-sm text-neutral-100 leading-relaxed">
                 {tool.description}
               </p>
             </div>
         )}
       </div>
-      <div className="p-touch-md border-t border-neutral-100 dark:border-neutral-800/50 flex-grow flex flex-col">
-        <h3 className="font-semibold text-base truncate text-black dark:text-white" role="heading" aria-level="3">{tool.name}</h3>
+      <div className="p-3 sm:p-4 border-t border-neutral-100 dark:border-neutral-800/50 flex-grow flex flex-col">
+        <h3 className="font-semibold text-sm sm:text-base truncate text-black dark:text-white" role="heading" aria-level="3">{tool.name}</h3>
         
         {viewMode === 'grid-visible' && (
             <p
-              className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 flex-grow"
+              className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-2 flex-grow line-clamp-2"
               aria-label="Tool description"
             >
                 {tool.description}
             </p>
         )}
 
-        <div className="mt-2 flex flex-wrap gap-1.5" role="list" aria-label="Tool keywords">
-          {tool.keywords.slice(0, 2).map(keyword => (
+        <div className="mt-2 flex flex-wrap gap-1 sm:gap-1.5" role="list" aria-label="Tool keywords">
+          {(tool.keywords || []).slice(0, 2).map(keyword => (
             <span
               key={keyword}
-              className="px-2 py-0.5 text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full"
+              className="px-1.5 sm:px-2 py-0.5 text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full truncate max-w-20 sm:max-w-none"
               role="listitem"
               aria-label={`Keyword: ${keyword}`}
             >
@@ -136,4 +136,4 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, viewMode, isAdvancedMode, ran
   );
 };
 
-export default ToolCard;
+export default memo(ToolCard);

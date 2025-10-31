@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import type { Tool } from '../types';
 import ToolCard from './ToolCard';
 import Spinner from './Spinner';
@@ -43,4 +43,4 @@ const FeaturedTools: React.FC<FeaturedToolsProps> = ({ tools, isAdvancedMode, lo
     );
 };
 
-export default FeaturedTools;
+export default memo(FeaturedTools);
