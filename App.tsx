@@ -11,7 +11,7 @@ import { Tool, Theme, ViewMode, SortOption, AppState } from './src/types';
 import { initialTools, getFeaturedTools, searchTools, sortTools } from './src/data/tools';
 import { errorHandler, withErrorBoundary } from './src/utils/errorHandler';
 import { logger } from './src/utils/logger';
-import { APP_CONFIG, THEME_CONFIG, STORAGE_KEYS } from './src/constants';
+import { APP_CONFIG, THEME_CONFIG, STORAGE_KEYS, VIEW_MODE_CONFIG } from './src/constants';
 
 function App() {
   // State management with proper typing
@@ -41,7 +41,7 @@ function App() {
         const initialTheme = savedTheme || (prefersDark ? Theme.Dark : Theme.Light);
         
         // Load other preferences
-        const savedViewMode = localStorage.getItem(STORAGE_KEYS.viewMode) as ViewMode || 'grid-hover';
+        const savedViewMode = (localStorage.getItem(STORAGE_KEYS.viewMode) as ViewMode) || VIEW_MODE_CONFIG.default;
         const savedAdvancedMode = localStorage.getItem('ai-tools-advanced-mode') === 'true';
         
         setAppState(prev => ({
@@ -55,7 +55,7 @@ function App() {
         
         logger.info('App: Application initialized successfully');
       } catch (error) {
-        logger.error('App: Failed to initialize application', error);
+        logger.error('App: Failed to initialize application', 'App', error);
         errorHandler.handleError(error);
         setAppState(prev => ({
           ...prev,
@@ -70,7 +70,7 @@ function App() {
 
   // Event handlers with error handling
   const handleThemeChange = useCallback((theme: Theme) => {
-    logger.info('App: Theme change requested:', theme);
+    logger.info('App: Theme change requested', 'Theme', theme);
     setAppState(prev => ({ ...prev, theme }));
   }, []);
 
@@ -115,7 +115,7 @@ function App() {
 
   // Theme effect with persistence
   useEffect(() => {
-    logger.debug('App: Theme changed to:', appState.theme);
+    logger.debug('App: Theme changed to', 'Theme', appState.theme);
     
     if (appState.theme === Theme.Dark) {
       document.documentElement.classList.add('dark');
@@ -137,7 +137,7 @@ function App() {
   }, [appState.isAdvancedMode]);
 
   const handleCategoryChange = useCallback((category: string) => {
-    logger.debug('App: Category change:', category);
+    logger.debug('App: Category change', 'Category', category);
     
     if (category === 'All') {
       setAppState(prev => ({ ...prev, activeCategories: ['All'] }));
@@ -167,7 +167,7 @@ function App() {
 
   const handleAddTool = useCallback((newTool: Omit<Tool, 'id'>) => {
     try {
-      logger.info('App: Adding new tool:', newTool.name);
+      logger.info('App: Adding new tool', 'Tool', newTool.name);
       
       setAppState(prev => {
         const toolWithId = { 
@@ -182,14 +182,14 @@ function App() {
       
       logger.info('App: Tool added successfully');
     } catch (error) {
-      logger.error('App: Failed to add tool', error);
+      logger.error('App: Failed to add tool', 'Tool', error);
       errorHandler.handleError(error);
     }
   }, []);
 
   const handleUpdateTool = useCallback((updatedTool: Tool) => {
     try {
-      logger.info('App: Updating tool:', updatedTool.name);
+      logger.info('App: Updating tool', 'Tool', updatedTool.name);
       
       setAppState(prev => ({
         ...prev,
@@ -200,18 +200,18 @@ function App() {
       
       logger.info('App: Tool updated successfully');
     } catch (error) {
-      logger.error('App: Failed to update tool', error);
+      logger.error('App: Failed to update tool', 'Tool', error);
       errorHandler.handleError(error);
     }
   }, []);
 
   const handleUserSubmit = useCallback((url: string, contact: string) => {
     try {
-      logger.info('App: User submission received:', { url, contact });
+      logger.info('App: User submission received', 'Submission', { url, contact });
       // In a real app, this would be sent to a backend for review
       // For now, just log the submission
     } catch (error) {
-      logger.error('App: Failed to handle user submission', error);
+      logger.error('App: Failed to handle user submission', 'Submission', error);
       errorHandler.handleError(error);
     }
   }, []);
@@ -238,7 +238,7 @@ function App() {
 
       return currentTools;
     } catch (error) {
-      logger.error('App: Error filtering/sorting tools', error);
+      logger.error('App: Error filtering/sorting tools', 'Tools', error);
       errorHandler.handleError(error);
       return appState.tools;
     }

@@ -21,7 +21,7 @@ export enum Theme {
   Dark = 'dark'
 }
 
-export type ViewMode = 'grid' | 'grid-hover' | 'list';
+export type ViewMode = 'grid-hover' | 'grid-visible' | 'list';
 export type SortOption = 'Daily' | 'Weekly' | 'Monthly';
 
 export interface AppState {

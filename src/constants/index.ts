@@ -27,7 +27,7 @@ export const THEME_CONFIG = {
 
 // View Mode Configuration
 export const VIEW_MODE_CONFIG = {
-  default: 'grid' as ViewMode,
+  default: 'grid-visible' as ViewMode,
   storageKey: 'ai-tools-view-mode',
   gridColumns: {
     mobile: 1,
