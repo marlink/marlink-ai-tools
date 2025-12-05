@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
           brotliSize: true,
         })
       ],
-      base: process.env.NODE_ENV === 'production' ? '/marlink-ai-tools/' : '/',
+      base: mode === 'production' ? '/marlink-ai-tools/' : '/',
       define: {},
       resolve: {
         alias: {
