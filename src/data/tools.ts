@@ -24,7 +24,7 @@ export const initialTools: Tool[] = [
     description: 'Anthropic\'s AI assistant focused on being helpful, harmless, and honest.',
     category: 'Conversational AI',
     url: 'https://claude.ai',
-    imageUrl: 'https://claude.ai/favicon.ico',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/47/Claude_AI_logo.svg',
     keywords: ['conversation', 'analysis', 'writing', 'coding'],
     popularity: {
       daily: 92,
@@ -41,7 +41,7 @@ export const initialTools: Tool[] = [
     description: 'AI-powered image generation tool creating stunning artwork from text prompts.',
     category: 'Image Generation',
     url: 'https://midjourney.com',
-    imageUrl: 'https://cdn.midjourney.com/b7e9b4b0-4b3a-4b3a-8b3a-4b3a4b3a4b3a/0_0.png',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Midjourney_Emblem.png',
     keywords: ['image-generation', 'art', 'creative', 'discord'],
     popularity: {
       daily: 95,
@@ -75,7 +75,7 @@ export const initialTools: Tool[] = [
     description: 'Open-source text-to-image diffusion model for generating detailed images.',
     category: 'Image Generation',
     url: 'https://stability.ai/stable-diffusion',
-    imageUrl: 'https://stability.ai/favicon.ico',
+    imageUrl: 'https://cdn.icon-icons.com/icons2/3914/PNG/512/stability_ai_logo_icon_248679.png',
     keywords: ['image-generation', 'open-source', 'diffusion', 'customizable'],
     popularity: {
       daily: 87,
@@ -92,7 +92,7 @@ export const initialTools: Tool[] = [
     description: 'AI writing assistant integrated into Notion for enhanced productivity.',
     category: 'Writing Assistant',
     url: 'https://notion.so/product/ai',
-    imageUrl: 'https://www.notion.so/images/favicon.ico',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Notion_app_logo.png',
     keywords: ['writing', 'productivity', 'notes', 'collaboration'],
     popularity: {
       daily: 84,
@@ -109,7 +109,7 @@ export const initialTools: Tool[] = [
     description: 'AI content creation platform for marketing teams and content creators.',
     category: 'Content Creation',
     url: 'https://jasper.ai',
-    imageUrl: 'https://jasper.ai/favicon.ico',
+    imageUrl: 'https://asset.brandfetch.io/idAnDTF_Y_/idG3bYpWjC.svg',
     keywords: ['content-creation', 'marketing', 'copywriting', 'templates'],
     popularity: {
       daily: 81,
@@ -126,7 +126,7 @@ export const initialTools: Tool[] = [
     description: 'OpenAI\'s image generation model creating realistic images from text descriptions.',
     category: 'Image Generation',
     url: 'https://openai.com/dall-e-2',
-    imageUrl: 'https://openai.com/favicon.ico',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
     keywords: ['image-generation', 'openai', 'realistic', 'creative'],
     popularity: {
       daily: 86,

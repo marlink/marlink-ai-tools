@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+// Gemini client moved server-side; use API instead
 import { Tool } from '../types';
 
 interface AdminPanelProps {
@@ -83,36 +83,20 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onAddTool, toolCount, 
             return;
         }
         setIsSubmitting(true);
-        setMessage('Analyzing URL with Gemini...');
+        setMessage('Analyzing URL...');
         setError('');
         setAnalysisResult(null);
         
         try {
-            const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || 'PLACEHOLDER_API_KEY');
-            const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-
-            const prompt = `
-                Based on information found via Google Search for the website ${url}, provide details about the AI tool in a valid JSON format.
-                Do not add any markdown formatting like \`\`\`json.
-                The JSON object must have these keys:
-                - "name" (string)
-                - "description" (string, a concise one-sentence summary)
-                - "category" (string, one of "Productivity", "Writing", "Creative", "Developer", "Marketing", "Research", "Video", "Audio")
-                - "keywords" (array of 5 relevant string keywords)
-                - "freeTier" (boolean, true if there is a free tier or free trial, otherwise false)
-                - "monthlyCost" (number or null, the starting price for a monthly subscription. If it's free, use 0. If pricing is enterprise-only or not publicly available, use null)
-                - "notes" (string, a brief note about the pricing, e.g., "Paid unlocks advanced features").
-            `;
-
-            const result = await model.generateContent(prompt);
-            const response = await result.response;
-            let jsonString = response.text().trim();
-
-            if (jsonString.startsWith('```json')) {
-              jsonString = jsonString.substring(7, jsonString.length - 3).trim();
+            const resp = await fetch('/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            if (!resp.ok) {
+                throw new Error('API error');
             }
-
-            const analysisResult: AnalysisResult = JSON.parse(jsonString);
+            const analysisResult: AnalysisResult = await resp.json();
             setAnalysisResult(analysisResult);
             setMessage('Analysis complete. Review the details below.');
 
